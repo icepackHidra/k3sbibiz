@@ -15,11 +15,6 @@ spec:
       labels:
         app: k3s-info-resilient
     spec:
-      readinessProbe:
-        tcpSocket:
-          port: 8080
-        periodSeconds: 1
-        failureThreshold: 1
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -35,6 +30,11 @@ spec:
       containers:
         - name: k3s-dockerinho
           image: icepackhidra/k3sinfo-flask:1.0.1
+          readinessProbe:
+            failureThreshold: 1
+            periodSeconds: 1
+            tcpSocket:
+              port: 8080
           env:
             - name: NODE_NAME
               valueFrom:
