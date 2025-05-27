@@ -15,6 +15,11 @@ spec:
       labels:
         app: k3s-info-resilient
     spec:
+      readinessProbe:
+        tcpSocket:
+          port: 8080
+        periodSeconds: 1
+        failureThreshold: 1
       affinity:
         podAntiAffinity:
           requiredDuringSchedulingIgnoredDuringExecution:
@@ -54,8 +59,3 @@ spec:
           operator: "Exists"
           effect: "NoExecute"
           tolerationSeconds: 5
-      readinessProbe:
-        tcpSocket:
-          port: 8080
-        periodSeconds: 1
-        failureThreshold: 1
