@@ -54,3 +54,8 @@ spec:
           operator: "Exists"
           effect: "NoExecute"
           tolerationSeconds: 5
+      readinessProbe:
+        tcpSocket:
+          port: 8080
+        periodSeconds: 1
+        failureThreshold: 1
